@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CEU Track A Document</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/inbox.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.min.css" rel="stylesheet">
+    <script src="https://code.angularjs.org/1.5.0/angular.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-cookies.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-route.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="css/inbox.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://cdn.phpoll.com/css/animate.css" rel="stylesheet">
+ 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+</head>
+
+<body id="page-top" class="index" ng-app="myApp" ng-controller="userCtrl">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="main.html">Scorpion Express</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" ng-model="username"></span>{{username}}</a>
+                        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+                            <div class="col-lg-12">
+                            <div class="text-left"><h3>{{username}}</h3></div>
+                                <div class="col-sm-12 userctrl">
+                                    <li class="page-scroll">
+                                        <a href="" ng-click="auth.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Portfolio Grid Section -->
+    <section id="about">
+    <div class="container">
+      <div class="col-lg-12 text-center">
+                    <h2>INBOX</h2>
+      <nav class="inbox navbar-default navbar-static-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="inbox navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="btn-compose pull-left">
+                <a type="button" ng-click="addMail()" class="btn btn-danger navbar-btn" data-target="#composeModal" data-toggle="modal"> <span class="glyphicon glyphicon-pencil"></span>Compose</a>
+            </div>
+            <div class="btn-compose pull-right">
+                <a type="button" ng-click="confirmBar()" class="btn btn-warning navbar-btn" data-target="#confirmModal" data-toggle="modal"> <span class="glyphicon glyphicon-pencil"></span>Confirm Document</a>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+        </nav>
+    </div>
+      </div>
+    <!-- /.container-fluid -->
+      
+    <div class="container">
+      <div class="content-container clearfix">
+        <div class="col-md-12">
+          <ul class="mail-list" >
+            <li>
+              <a ng-repeat="(key, mails) in mail" data-target="#mailModal" data-toggle="modal" ng-click="showMail(key)">
+                <span class="mail-sender">{{ mails.sender }}</span>
+                <span class="mail-subject">{{ mails.subject }}</span>
+                <span class="mail-message-preview">{{ mails.message }}</span>          
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</section>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <!-- Confirm Barcode Modal -->
+    <div class="modal fade" tabindex="-1" id="confirmModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-success">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Document</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div  class="col-lg-12">
+                            <form ng-submit="updateMail()" role="form">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <input id="barcode"  title="Number key allowed" data-placement="left" onmouseover="this.focus()" ng-model="trackingNo" maxlength="12" type="text" class="form-control" placeholder="Scan Barcode" />
+                                  </div>
+                                  
+                                  <div class="btn-send">
+                                  <button type="submit"  id="barbutton" disabled  class="btn btn-success btn-lg"><span class="glyphicon glyphicon-send"></span> Send</button>
+                                  </div>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compose Modal -->
+    <div class="modal fade" tabindex="-1" id="composeModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-success">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Compose</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form id="formBinde" role="form">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <select ng-model="mto" class="selectpicker" data-live-search="true" data-width="100%">
+                                        <option value="" disabled selected> Select your option... </option>
+                                        <optgroup label="Manila">
+                                        <option ng-repeat="(key,loca) in loc" value="{{ loca.loc }}">{{loca.loc}}</option>
+                                        </optgroup>
+                                        <optgroup label="Malolos">
+                                        <option ng-repeat="(key,malo) in mal" value="{{ malo.mal }}">{{malo.mal}}</option>
+                                        </optgroup>
+                                        <optgroup label="Makati">
+                                        <option ng-repeat="(key,maka) in mak" value="{{ maka.mak }}">{{maka.mak}}</option>
+                                        </optgroup>
+                                        </select>
+                                  </div>
+                                  <div class="form-group">
+                                      <input id="msub" ng-model="msub" type="text" class="form-control" placeholder="Subject" />
+                                  </div>
+                                  <textarea id="mmes" ng-model="mmes" class="form-control" placeholder="Message"></textarea>
+                                  <div class="btn-send">
+                                  <button ng-click="insertMail()" id="submitBare" data-dismiss="modal" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-send"></span> Send</button>
+                                  </div>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <!-- Mail Modal -->
+  <div class="modal fade" tabindex="-1"  role="dialog" id="mailModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="mto" ng-model="mto"> {{mto}} <button type="button"  class="btn btn-primary navbar-btn" data-target="#forwardModal" ng-click="clearForw()" data-toggle="modal" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span></button>
+<button type="button"  ng-click="deleteMail(key)" class="btn btn-danger navbar-btn" data-dismiss="modal"> <span class="glyphicon glyphicon-trash"></span></button> </h4>
+      </div>
+      <div class="modal-body">
+        <h5 id="msub" ng-model="msub">{{msub}}&hellip;</h5>
+      </div>
+      <div class="modal-footer">
+        <p id="mmes" ng-model="mmes">{{mmes}}</p>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+  <!-- Forward Modal -->
+  <div class="modal fade" tabindex="-1" id="forwardModal" role="dialog">
+      <div class="modal-dialog modal-md">
+          <div class="modal-content">
+              <div class="modal-header modal-header-success">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Forward</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <form id="formBinder" role="form">
+                            <!-- <div class="col-md-12"> -->
+                                <div class="form-group">
+                                    <select ng-model="mto" class="selectpicker" data-live-search="true" data-width="100%">
+                                      <option value="" disabled selected> Select your option... </option>
+                                       <optgroup label="Manila">
+                                        <option ng-repeat="(key,loca) in loc" value="{{ loca.loc }}">{{loca.loc}}</option>
+                                        </optgroup>
+                                        <optgroup label="Malolos">
+                                        <option ng-repeat="(key,malo) in mal" value="{{ malo.mal }}">{{malo.mal}}</option>
+                                        </optgroup>
+                                        <optgroup label="Makati">
+                                        <option ng-repeat="(key,maka) in mak" value="{{ maka.mak }}">{{maka.mak}}</option>
+                                        </optgroup>
+                                      </select>
+                                </div>
+                                      <!-- </div> -->
+                                <div class="modal-body">
+                                  <h5 id="msub" ng-model="msub">{{msub}}&hellip;</h5>
+                                </div>
+                                <div class="modal-footer">
+                                  <p id="mmes" ng-model="mmes">{{mmes}}</p>
+                                </div>
+                                <div class="btn-send">
+                                <button ng-click="insertMail()" data-dismiss="modal" id="submitBarer" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-send"></span> Send</button>
+                                </div>
+                            </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  
+    <!-- jQuery -->
+    <!-- // <script src="js/jquery.js"></script> -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <!-- // <script src="js/bootstrap.min.js"></script> -->
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/bootbox.min.js"></script>
+    <script src="js/freelancer.js"></script>
+    <script src="search.js"></script>
+    <script src="js/factories/auth.js"></script> 
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.js"></script>
+</body>
+
+</html>

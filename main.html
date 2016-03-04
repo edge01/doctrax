@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CEU Track A Document</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.min.css" rel="stylesheet">
+    <script src="https://code.angularjs.org/1.5.0/angular.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-cookies.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-route.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://cdn.phpoll.com/css/animate.css" rel="stylesheet">
+ 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+</head>
+
+<body id="page-top" class="index" ng-app="myApp" ng-controller="userCtrl">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand navbar-brand-home"><img src="img/malolos-icon.png" class="img-responsive img-centered-home" alt="">Centro Docs</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" ng-model="username"></span>{{username}}</a>
+                        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+                            <div class="col-lg-12">
+                            <div class="text-left"><h3>{{username}}</h3></div>
+                                <div class="col-sm-12 userctrl">
+                                    <li class="page-scroll">
+                                        <a href="" data-toggle="modal" ng-click="addUser()" data-target="#addUser"><span class="glyphicon glyphicon-plus"></span>Add User</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li class="page-scroll">
+                                        <a href="" ng-click="auth.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- About Section --> 
+    <section class="success" id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>{{office}}</h2>
+
+                    <div class="col-sm-4 portfolio-item">
+                        <a href="inbox.html" ng-click="clearSearch()" class="portfolio-link">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <i class="fa fa-search-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img src="img/portfolio/inbox2.png" class="img-responsive img-centered" alt="">
+                        </a>
+                    </div>
+
+                    <div data-toggle="tooltip" class="col-sm-4 portfolio-item">
+                        <a data-target="#searchModal"  ng-click="clearSearch()" class="portfolio-link" data-toggle="modal">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <i class="fa fa-search-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img src="img/portfolio/docu2.png" class="img-responsive img-centered" alt="">
+                        </a>
+                    </div>
+
+                    <div class="col-sm-4 portfolio-item">
+                        <a data-target="#barcodegen" ng-click="clearBar()" class="portfolio-link" data-toggle="modal">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <i class="fa fa-search-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img src="img/portfolio/barcode.png" class="img-responsive img-centered" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    
+                </div>
+            </div>
+        </div>
+  </section>
+    
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="modal fade" tabindex="-1" id="searchModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-success">
+                    <h4 class="modal-title">Search Document</h4><br>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form id="formShow" ng-submit="searchUser()" role="form">
+                              <div class="col-md-12">
+                                     <div class="form-group col-xs-12">
+                                        <label>Document No.</label>
+                                        <input type="text"  title="Alpha Key Disabled" maxlength="12" ng-model="searchString" id="barcode" class="form-control" placeholder="Document No." required data-validation-required-message="Please enter document number">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="btn-send">
+                                        <button type="submit" id="barbutton" disabled class="btn btn-success btn-lg">Search</button>
+                                    </div>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Barcode Image Modal -->
+    <div class="modal fade" tabindex="-1" id="barImg" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-success">
+                    <h4 class="modal-title">Print Barcode Image</h4><br>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                          
+                              <div class="col-md-12">
+                                     <div class="form-group col-xs-12">
+                                        <label>Barcode Image</label>
+                                        <div id="printableArea">
+                                        <img src="https://www.barcodesinc.com/generator/image.php?code={{barid}}&style=197&type=C128A&width=230&height=50&xres=1&font=5" ng-click="PrintElem('#printableArea')" />
+                                    </div>
+                           
+                                    </div>
+                                   
+                              </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+   <!-- Track Status -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Tracking Status</h2><br><br>
+                            <hr class="star-primary">
+                            <h3 ng-repeat="(key, dox) in doxs">
+                
+                            Tracking Number:<div id="barprint"> <img src="https://www.barcodesinc.com/generator/image.php?code={{dox.trackingNo}}&style=197&type=C128A&width=230&height=50&xres=1&font=5" ng-click="PrintElem('#barprint')"></div>
+                            Document Type: {{ dox.docu_type }} <br>
+                            Sender: {{ dox.sender }} <br>
+                            Receiver: {{ dox.receiver }} <br>
+                            Status: {{ dox.status }} <br>
+                            Date: {{ dox.date_time }} <br>
+                            
+                        </h3>
+                                    <h5>{{message}}</h5>
+        
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Generate Barcode Modal -->
+<div class="portfolio-modal modal fade" id="barcodegen" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Generate Barcode</h2>
+                            <!-- <img src="img/portfolio/barcode.png" class="img-responsive img-centered" alt=""> -->
+                            <form id="formBind" ng-submit="insertDocument()">
+                                <div class="row control-group">
+                                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                                        <label>Receiver</label>
+                              
+                                        <select ng-model="receiver" class="selectpicker"  data-live-search="true"  data-width="100%">
+                                        <option  value="" disabled selected> Select your option... </option>
+                                        <optgroup label="Manila">
+                                        <option ng-repeat="(key,loca) in loc" value="{{ loca.loc }}">{{loca.loc}}</option>
+                                        </optgroup>
+                                        <optgroup label="Malolos">
+                                        <option ng-repeat="(key,malo) in mal" value="{{ malo.mal }}">{{malo.mal}}</option>
+                                        </optgroup>
+                                        <optgroup label="Makati">
+                                        <option ng-repeat="(key,maka) in mak" value="{{ maka.mak }}">{{maka.mak}}</option>
+                                        </optgroup>
+                                        </select>
+                                    
+                                        <label>Document Type</label>
+                                       
+                                        <select ng-model="doctypes" class="selectpicker1"  data-width="100%">
+                                            <option  value="" disabled selected> Select your option... </option>
+                                        <optgroup label="Document Type">
+                                        <option ng-repeat="(key,doca) in doc" value="{{ doca.doc }}">{{doca.doc}}</option>
+                                        </optgroup>
+                                        </select>
+                                         <input id="others" ng-model="doctypes" type="text" class="form-control" placeholder="Specify your document proposal" />
+                                   
+                                    </div>
+                                </div>
+                                <br>
+                                <div id="success"></div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                            
+                                    <input type="submit" value="Generate Barcode" id="submitBar" class="btn btn-success btn-lg"/>
+                                        
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal Add User -->
+<div class="portfolio-modal modal fade" id="addUser" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Add User</h2><br>
+                            <!-- <img src="img/portfolio/barcode.png" class="img-responsive img-centered" alt=""> -->
+                             <form id="formUser" ng-submit="insertUser()">
+                                <div class="row control-group">
+                                    <div class="form-group col-xs-12">
+                                        <label>Username</label>
+                                        <input type="text" class="form-control" value="" id="uname" ng-model="uname" required data-validation-required-message="Username"/>
+                                        <label>Password</label>
+                                            <div class="spicker">
+                                            <input type="text" class="form-control" value="" id="pword" ng-model="pword" required data-validation-required-message="Username"/>
+                                        </div>
+                                         <label>Office</label>
+                                        <div class="spicker">
+                                            <select ng-model="ofice" class="selectpicker3"  data-live-search="true"  data-width="100%">
+                                            <option  value="" disabled selected> Select your option... </option>
+                                            <optgroup label="Manila">
+                                                <option ng-repeat="(key,loca) in loc" value="{{ loca.loc }}">{{loca.loc}}</option>
+                                            </optgroup>
+                                            <optgroup label="Malolos">
+                                                <option ng-repeat="(key,malo) in mal" value="{{ malo.mal }}">{{malo.mal}}</option>
+                                            </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div id="success"></div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                            
+                                    <input type="submit" value="Add User" id="submitUser" class="btn btn-success btn-lg"/>
+                                        
+                                    <button type="button" data-dismiss="modal" class="btn btn-warning btn-lg">Close</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <!-- // <script src="js/jquery.js"></script> -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <!-- // <script src="js/bootstrap.min.js"></script> -->
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/bootbox.min.js"></script>
+    <script src="js/freelancer.js"></script>
+    <script src="search.js"></script>
+    <script src="js/factories/auth.js"></script> 
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.js"></script>
+</body>
+
+</html>
